@@ -7,3 +7,27 @@ __pycache__/
 *.pyc
 .pytest_cache/
 venv/
+# Python environment
+.venv/
+venv/
+__pycache__/
+*.py[cod]
+
+# Test cache
+.pytest_cache/
+
+# Local database and logs
+*.db
+*.db-journal
+*.log
+
+# Private configuration
+config.txt
+.env
+.env.*
+
+# Backup files
+dashboard_backup.py
+
+# OS files
+.DS_Store

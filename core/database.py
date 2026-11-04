@@ -44,9 +44,22 @@ def export_to_csv(filename="report.csv"):
 def get_monthly_report():
     conn = get_conn()
     c = conn.cursor()
+
     month = datetime.now().strftime("%Y-%m")
-    total_spend = c.execute("SELECT COALESCE(SUM(quantity*price),0) FROM purchases WHERE strftime('%Y-%m', purchase_date) = ?", (month,)).fetchone()[0]
-    by_cat = c.execute("SELECT category, SUM(quantity*price) as s FROM purchases WHERE strftime('%Y-%m', purchase_date) = ? GROUP BY category", (month,)).fetchall()
+
+    total_spend = c.execute("""
+        SELECT COALESCE(SUM(quantity * price), 0)
+        FROM purchases
+        WHERE substr(purchase_date, 1, 7) = ?
+    """, (month,)).fetchone()[0]
+
+    by_cat = c.execute("""
+        SELECT category, SUM(quantity * price) AS s
+        FROM purchases
+        WHERE substr(purchase_date, 1, 7) = ?
+        GROUP BY category
+    """, (month,)).fetchall()
+
     conn.close()
     return {"total": total_spend, "by_cat": by_cat}
 
