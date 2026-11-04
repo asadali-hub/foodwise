@@ -38,7 +38,3 @@ This project strictly uses Python's standard libraries to demonstrate core progr
 
 ## 🛠️ Installation & Setup
 
-1. **Clone the repository:**
-   ```bash
-   git clone https://github.com/Aakash-coder360/foodwise.git
-   cd foodwise
